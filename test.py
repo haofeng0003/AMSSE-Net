@@ -1,8 +1,5 @@
 # -*- coding:utf-8 -*-
-"""
-作者：张亦严
-日期:2022年09月22日
-"""
+
 from sklearn.metrics import confusion_matrix, accuracy_score, classification_report, cohen_kappa_score
 import torch
 import time
@@ -49,20 +46,3 @@ def test(test_iter, dataset, device, net1):
     return classification, oa, aa, kappa, each_acc
 
 
-def test_demo(test_iter, dataset, device, net1):
-    # net1.load_state_dict(torch.load('./models/' + dataset + '.pt'))  # 加载保存好的模型
-    # print('\n***Start  Testing***\n')
-    test_acc_sum = 0.0
-    y_test = []
-    y_pred = []
-    with torch.no_grad():
-        for step, (X_hsi, X_lidar, y) in enumerate(test_iter):
-            net1.eval()
-            X_hsi = X_hsi.to(device)
-            X_lidar = X_lidar.to(device)
-            y = y.to(device)
-            out, out0, out1, out2, beta = net1(X_hsi, X_lidar)
-            net1.train()
-            test_acc_sum += (out.argmax(dim=-1) == y.to(device)).float().sum().cpu().item()
-    oa = test_acc_sum / len(test_iter.dataset)
-    return oa

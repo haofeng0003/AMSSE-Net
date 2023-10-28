@@ -22,9 +22,9 @@ def setup_seed(seed):
 
 
 def load_data(dataset):
-    # data_path = r'/home/ubuntu/dataset_RS/Multisource/data'
+    data_path = r'/home/ubuntu/dataset_RS/Multisource/data'
     # data_path = r'F:\science\data'
-    data_path = r'F:\science\data_server'
+    # data_path = r'F:\science\data_server'
 
     if dataset == 'Houston': #HSI.shape (349, 1905, 144), LiDAR.shape (349, 1905) gt.shape (349, 1905)=
         HSI_data = sio.loadmat(os.path.join(data_path, 'Houston2013_Data/Houston2013_HSI.mat'))['HSI']
